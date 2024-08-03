@@ -20,9 +20,7 @@ struct State {
 impl State {
     fn run_systems(&mut self) {
         let mut vis = VisibilitySystem {};
-
         vis.run_now(&self.ecs);
-
         self.ecs.maintain();
     }
 }
@@ -30,6 +28,8 @@ impl State {
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         ctx.cls();
+
+        self.run_systems();
 
         player_input(self, ctx);
 
